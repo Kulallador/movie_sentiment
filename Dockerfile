@@ -8,9 +8,10 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-ENV SECRET_KEY="key"
 # RUN python backend/manage.py runserver
 # CD backend/
+RUN python3 -m nltk.downloader wordnet
+RUN unzip /root/nltk_data/corpora/wordnet.zip -d /root/nltk_data/corpora/
 
-# ENTRYPOINT ["python"]
-# CMD ["backend/manage.py", "runserver"]
+ENTRYPOINT ["python"]
+CMD ["backend/manage.py", "runserver", "0.0.0.0:8000"]

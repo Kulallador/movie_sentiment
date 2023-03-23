@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .apps import SentimentConfig
-from .preprocessing import preprocess_text, mystem_lemmatize, score_corrector 
+from .preprocessing import preprocess_text, lemmatize, score_corrector 
 
 def index(request):
     return render(request, 'sentiment/index.html')
@@ -9,7 +9,7 @@ def index(request):
 def classify(request):
     review = request.POST["review"]
     preproc_review = preprocess_text(review)
-    lemmatize_review = mystem_lemmatize(preproc_review)
+    lemmatize_review = lemmatize(preproc_review)
 
     vectorize_review = SentimentConfig.tfidf.transform([lemmatize_review])
     

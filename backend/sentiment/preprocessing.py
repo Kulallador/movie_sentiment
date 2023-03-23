@@ -3,11 +3,16 @@ import re
 import string
 import nltk 
 from nltk.tokenize import WordPunctTokenizer
-from pymystem3 import Mystem
-
+from nltk.stem import WordNetLemmatizer
+# from pymystem3 import Mystem
+print("run")
 nltk.download("stopwords")
+nltk.download('wordnet')
+print("asdasfgesdzxxasvd")
+
 tokenizer = WordPunctTokenizer()
-lemmatizer = Mystem()
+# lemmatizer = Mystem()
+lemmatizer = WordNetLemmatizer()
 stopwords = nltk.corpus.stopwords.words("english")
 
 def preprocess_text(text):
@@ -23,12 +28,19 @@ def preprocess_text(text):
         sents.append(" ".join(tokens))
     return " ".join(sents)
 
-def mystem_lemmatize(text):
-    lemmatized_text = []
+# def lemmatize(text):
+#     lemmatized_text = []
 
-    lemmatized_text = lemmatizer.lemmatize(text)
+#     lemmatized_text = lemmatizer.lemmatize(text)
 
-    return " ".join(lemmatized_text)
+#     return " ".join(lemmatized_text)
+
+def lemmatize(sent):
+    lemmatized_tokens = []
+    for token in tokenizer.tokenize(sent):
+        word = lemmatizer.lemmatize(token)
+        lemmatized_tokens.append(word)
+    return " ".join(lemmatized_tokens)
 
 def score_corrector(label):
     if label > 3:
