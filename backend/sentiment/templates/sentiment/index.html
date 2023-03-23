@@ -90,8 +90,8 @@
                     document.getElementById("errorText").textContent = result.error;
                     return false;
                 }                
-                
-                document.getElementById("resultClassification").textContent = result.score + " " + result.sentiment;
+                resultText = `Оценка: ${result.score}, впечатление: ${result.sentiment}`
+                document.getElementById("resultClassification").textContent = resultText;
 
                 return false;
             }

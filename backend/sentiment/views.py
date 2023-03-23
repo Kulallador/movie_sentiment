@@ -20,9 +20,9 @@ def classify(request):
 
     sentiment = None
     if score > 6:
-        sentiment = "Good"
+        sentiment = "хорошее"
     else:
-        sentiment = "Bad"
+        sentiment = "плохое"
 
     return JsonResponse({
         "sentiment":sentiment,

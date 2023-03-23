@@ -4,14 +4,11 @@ import string
 import nltk 
 from nltk.tokenize import WordPunctTokenizer
 from nltk.stem import WordNetLemmatizer
-# from pymystem3 import Mystem
-print("run")
+
 nltk.download("stopwords")
 nltk.download('wordnet')
-print("asdasfgesdzxxasvd")
 
 tokenizer = WordPunctTokenizer()
-# lemmatizer = Mystem()
 lemmatizer = WordNetLemmatizer()
 stopwords = nltk.corpus.stopwords.words("english")
 
@@ -27,13 +24,6 @@ def preprocess_text(text):
                 tokens.append(word)
         sents.append(" ".join(tokens))
     return " ".join(sents)
-
-# def lemmatize(text):
-#     lemmatized_text = []
-
-#     lemmatized_text = lemmatizer.lemmatize(text)
-
-#     return " ".join(lemmatized_text)
 
 def lemmatize(sent):
     lemmatized_tokens = []
