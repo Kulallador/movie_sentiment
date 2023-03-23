@@ -8,4 +8,4 @@ build:
   requirementsPath: requirements.txt
 
 run:
-  command: python backend/manager.py runserver
+  command: python backend/manage.py runserver
