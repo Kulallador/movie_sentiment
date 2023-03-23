@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="/" class="nav-link px-2 text-white">Emotion</a></li>
+                        <li><a href="/" class="nav-link px-2 text-white">Movie sentiment</a></li>
                     </ul>
                     
                     <!-- <div class="text-end">
@@ -24,14 +24,9 @@
         <div class="px-4 pt-5 my-5 text-center border-bottom">
             <div id="previewLabel">
                 <h1 class="display-4 fw-bold">Оценка тональности отзыва</h1>
-                <p class="lead mb-4">Введите отзыв</p>
+                <p class="lead mb-4">Введите отзыв на английском языке</p>
             </div>
-            <!-- <div id="loadDiv" hidden="true">
-                <div class="spinner-border text-success" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <p>Загрузка...</p>
-            </div> -->
+
             <!-- <div class="text-danger" id="errorDiv" hidden="true" >
                 <p id="errorText">Ошибка</p>
             </div> -->
@@ -39,6 +34,12 @@
                 <form id="formElem" method="POST">{% csrf_token %}
                     <div class="justify-content-sm-center" id="contentDiv">
                         <textarea type="text" id="textReview" cols="60" rows="5" name="review"></textarea>
+                        <div id="loadDiv" hidden="true">
+                            <div class="spinner-border text-success" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p>Загрузка...</p>
+                        </div>
                         <p id="resultClassification"></p>
                         <button id="submitBtn" type="submit" class="btn btn-outline-success">Отправить</button>
                     </div>
@@ -66,12 +67,9 @@
             formElem.onsubmit = async (e) => {
                 e.preventDefault();
 
-                // document.getElementById("loadDiv").hidden = false;
-                // document.getElementById("errorDiv").hidden = true;
-
-                // console.log("loadDiv ", + document.getElementById("loadDiv").hidden)
-
-                // document.getElementById("submitBtn").disabled = true
+                document.getElementById("loadDiv").hidden = false;
+                document.getElementById("resultClassification").hidden = true;
+                document.getElementById("submitBtn").disabled = true
                 console.log("push button");
                 console.log(csrftoken);
                 let response = await fetch("/sentiment/classify", {
@@ -80,11 +78,12 @@
                     mode: 'same-origin',
                     body: new FormData(formElem)
                 });
-                // document.getElementById("submitBtn").disabled = false
+                document.getElementById("submitBtn").disabled = false
 
                 let result = await response.json(); 
 
-                // document.getElementById("loadDiv").hidden = true;
+                document.getElementById("loadDiv").hidden = true;
+                document.getElementById("resultClassification").hidden = false;
 
                 if (result.error != null) {
                     document.getElementById("errorDiv").hidden = false;
