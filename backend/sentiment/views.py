@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .apps import SentimentConfig
 from .preprocessing import preprocess_text, lemmatize, score_corrector 
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     return render(request, 'sentiment/index.html')
 
+@csrf_exempt
 def classify(request):
     review = request.POST["review"]
     preproc_review = preprocess_text(review)
