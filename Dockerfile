@@ -13,4 +13,4 @@ COPY . .
 # RUN unzip /root/nltk_data/corpora/wordnet.zip -d /root/nltk_data/corpora/
 
 ENTRYPOINT ["python"]
-CMD ["backend/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["backend/manage.py", "runserver", "0.0.0.0:0080"]
